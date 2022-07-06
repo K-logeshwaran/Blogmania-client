@@ -30,3 +30,5 @@ const NavBar=({logoutbtn,feeds,AddBlog,MyAcc})=>{
 //     MyAcc:<a>MyAccount</a>
 // }
 export default NavBar;
+
+//https://localhost

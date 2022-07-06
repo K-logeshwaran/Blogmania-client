@@ -23,7 +23,7 @@ export function Logincp() {
       async function submitHandler(e){
         e.preventDefault()
         try{
-            let res = await axios.post("http://localhost:3001/login/generateToken",{email,password})
+            let res = await axios.post("https://blogmania-server.herokuapp.com/login/generateToken",{email,password})
             console.log(res);
             if(res.status == 200){
                 sessionStorage.setItem("token",res.data)

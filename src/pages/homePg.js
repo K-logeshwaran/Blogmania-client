@@ -29,7 +29,7 @@ function Home() {
         if(!state.token || state.token === undefined){
           console.log("No token found");
         }else{
-          let res = await axios.post("http://localhost:3001/user",{
+          let res = await axios.post("https://blogmania-server.herokuapp.com/user",{
             token:state.token
          })
           let data = res.data

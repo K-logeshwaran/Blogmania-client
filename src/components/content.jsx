@@ -15,7 +15,7 @@ function Content() {
 
     console.log(posts);
     async function getAll() {
-        let res = await fetch("http://localhost:3001/",{
+        let res = await fetch("https://blogmania-server.herokuapp.com/",{
             headers:{
                 "x-access-token":sessionStorage.getItem("token")
             }

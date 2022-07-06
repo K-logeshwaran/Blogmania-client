@@ -22,7 +22,7 @@ function Singup(){
       if(1===1){
           try{
               let DOJ = new Date()
-              let res = await axios.post("http://localhost:3001/login",{email,password,DOJ,userName})
+              let res = await axios.post("https://blogmania-server.herokuapp.com/login",{email,password,DOJ,userName})
               console.log(res);
               if(res.status === 200) setRegistered(true)
 

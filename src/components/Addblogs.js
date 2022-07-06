@@ -12,7 +12,7 @@ function AddBlogs() {
     const con = useRef();
     const navigator = useNavigate()
     const handler =async  (e)=>{
-        let res = await axios.post("http://localhost:3001/posts",{
+        let res = await axios.post("https://blogmania-server.herokuapp.com/posts",{
             token:sessionStorage.getItem("token"),
             post:{
                 title,
@@ -56,3 +56,5 @@ function AddBlogs() {
 }
 
 export default AddBlogs;
+
+//https://blogmania-server.herokuapp.com/

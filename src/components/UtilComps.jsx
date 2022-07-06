@@ -37,7 +37,7 @@ function TopRight({userName,created_at,handler}) {
   const getName= async () =>{
     console.log("token");
     console.log(state.token);
-    let res = await axios.post("http://localhost:3001/user",{
+    let res = await axios.post("https://blogmania-server.herokuapp.com/user",{
         token:state.token
     })
     let data = res.data
