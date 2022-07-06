@@ -19,7 +19,7 @@ function EditContent({close,bioController}) {
                 bg ='#000'
                 onClick={ async e=>{
                     try{
-                        let res =await axios.put('http://localhost:3001/user/bio',{
+                        let res =await axios.put('https://blogmania-server.herokuapp.com/user/bio',{
                             token:sessionStorage.getItem("token"),
                             bio:bio
                         });
