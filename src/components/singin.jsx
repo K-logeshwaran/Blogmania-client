@@ -9,6 +9,9 @@ function Singup(){
   const [password,setPassword] = useState("");
   const [link,setlink] = useState(false);
   const [registered,setRegistered] = useState(false);
+
+  const [loading,setLoading] = useState(false)
+
     useEffect(e=>{
       setError('')
       
@@ -19,12 +22,16 @@ function Singup(){
 
     async function AuthUser(e){
       e.preventDefault()
+      setLoading(true)
       if(1===1){
           try{
               let DOJ = new Date()
               let res = await axios.post("https://blogmania-server.herokuapp.com/login",{email,password,DOJ,userName})
               console.log(res);
-              if(res.status === 200) setRegistered(true)
+              if(res.status === 200){
+                 setRegistered(true)
+                 setLoading(false)
+                }
 
           }catch(err){
               console.log(err);
@@ -43,14 +50,13 @@ function Singup(){
       <>
         
         <Main ht='66'>
-            {
+          {
             registered === true ?
             <NavLink to='/' replace>
-              <h1>Logged Success</h1>
+              <h1>Logged Success </h1>
+              <h1>Click Here to login!</h1>
             </NavLink>
-            :
-            
-            
+            : loading === true ? <StyledH1>Loading</StyledH1>:
             <BasicDiv mgBtm='50'>
                 <StyledH1 >SignUp!</StyledH1>
                   <ErrSpan>{error}</ErrSpan>

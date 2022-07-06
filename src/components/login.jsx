@@ -10,6 +10,8 @@ export function Logincp() {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
+    const [loading,setLoading] = useState(false)
+
     const navigate = useNavigate();
     const state = useContext(AuthContext);
     console.log(state);
@@ -22,6 +24,7 @@ export function Logincp() {
       
       async function submitHandler(e){
         e.preventDefault()
+        setLoading(false)
         try{
             let res = await axios.post("https://blogmania-server.herokuapp.com/login/generateToken",{email,password})
             console.log(res);
@@ -50,9 +53,14 @@ export function Logincp() {
        
     return(
        <Main ht='66'>
-        { 
+        
             <BasicDiv>
-                <StyledH1>LogIn!</StyledH1>
+                {
+                    loading === true ? 
+                    <StyledH1>Loading</StyledH1>
+                    :
+                    <>
+                        <StyledH1>LogIn!</StyledH1>
                 <ErrSpan>{error}</ErrSpan>
                 <form 
                     onSubmit={submitHandler} >
@@ -74,9 +82,12 @@ export function Logincp() {
                 <Msg>
                     <h4 style={{margin:"5px"}}>Not Having a account?</h4>
                     <NavLink replace to='/singup'>SignUp! Now</NavLink>
-                </Msg>                
+                </Msg> 
+                    </>
+                }
+                               
             </BasicDiv>
-        }
+        
        </Main>
         
     );
