@@ -22,6 +22,10 @@ function EditContent({close,bioController}) {
                         let res =await axios.put('https://blogmania-server.herokuapp.com/user/bio',{
                             token:sessionStorage.getItem("token"),
                             bio:bio
+                        },{
+                            headers:{
+                                "Access-Control-Allow-Origin": "*"
+                            }
                         });
                         let rep =res.data
                         console.log(rep);
@@ -57,6 +61,10 @@ function UserPage() {
         console.log(state.token);
         let res = await axios.post("https://blogmania-server.herokuapp.com/user",{
             token:state.token
+        },{
+            headers:{
+                "Access-Control-Allow-Origin": "*"
+            }
         })
         let data = res.data
         console.log(data);

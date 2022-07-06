@@ -17,7 +17,8 @@ function Content() {
     async function getAll() {
         let res = await fetch("https://blogmania-server.herokuapp.com/",{
             headers:{
-                "x-access-token":sessionStorage.getItem("token")
+                "x-access-token":sessionStorage.getItem("token"),
+                "Access-Control-Allow-Origin": "*"
             }
         })
         let data = await res.json()

@@ -18,6 +18,10 @@ function AddBlogs() {
                 title,
                 content
             }
+        },{
+            headers:{
+                "Access-Control-Allow-Origin": "*"
+            }
         });
         console.log(res);
         setSuccess(true)

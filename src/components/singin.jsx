@@ -26,7 +26,12 @@ function Singup(){
       if(1===1){
           try{
               let DOJ = new Date()
-              let res = await axios.post("https://blogmania-server.herokuapp.com/login",{email,password,DOJ,userName})
+              let res = await axios.post("https://blogmania-server.herokuapp.com/login",{email,password,DOJ,userName},{
+                headers:{
+                  
+                  "Access-Control-Allow-Origin": "*"
+              }
+              })
               console.log(res);
               if(res.status === 200){
                  setRegistered(true)

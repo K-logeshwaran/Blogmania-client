@@ -26,7 +26,9 @@ export function Logincp() {
         e.preventDefault()
         setLoading(false)
         try{
-            let res = await axios.post("https://blogmania-server.herokuapp.com/login/generateToken",{email,password})
+            let res = await axios.post("https://blogmania-server.herokuapp.com/login/generateToken",{email,password},{ headers:{
+                "Access-Control-Allow-Origin": "*"
+            }})
             console.log(res);
             if(res.status == 200){
                 sessionStorage.setItem("token",res.data)

@@ -39,7 +39,9 @@ function TopRight({userName,created_at,handler}) {
     console.log(state.token);
     let res = await axios.post("https://blogmania-server.herokuapp.com/user",{
         token:state.token
-    })
+    },{ headers:{
+      "Access-Control-Allow-Origin": "*"
+  }})
     let data = res.data
     console.log(data);
     setUser(data);
