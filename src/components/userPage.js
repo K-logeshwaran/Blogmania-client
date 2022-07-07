@@ -123,29 +123,29 @@ function UserPage() {
                         {
                             userData.posts.length === 0 ?
                             <StyledH1>Nothing Posted Yet</StyledH1>
-                            :userData.posts.map(e=>{
+                            :userData.posts.map(itm=>{
                                 return(
                                     <Uposts widht="70%" >
                                         <TopRight
                                             
                                             userName={userData.userName}
-                                            created_at ={e.created_at}
+                                            created_at ={itm.created_at}
                                         />
-                                        <h3 style={{"padding":"1rem"}}>{e.title}</h3>
-                                        <p style={{"padding":"1rem"}}>{e.content}</p>
+                                        <h3 style={{"padding":"1rem"}}>{itm.title}</h3>
+                                        <p style={{"padding":"1rem"}}>{itm.content}</p>
                                         <DelBtn onClick={async e=>{
                                             setSelectedPost(e._id)
                                             let res =await axios.delete('https://blogmania-server.herokuapp.com/posts/delete',{
                                                 headers:{
                                                     "x-access-token":sessionStorage.getItem("token"),
-                                                    "postid":e._id
+                                                    "postid":itm._id
                                                 }
                                             
                                             }
                                             )
                                             console.log("id....");
-                                            console.log(e.title)
-                                            console.log(e._id);
+                                            console.log(itm.title)
+                                            console.log(itm._id);
                                             if(res.status===200) alert("Delection Success")
                                         }}>Delete</DelBtn>
                                     </Uposts>
