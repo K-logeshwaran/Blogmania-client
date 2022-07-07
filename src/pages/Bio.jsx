@@ -18,7 +18,7 @@ function Bio() {
     const [userData,setUserData] = useState(null)
     // console.log(data)
     useEffect(async () => {
-        let res = await axios.post("http://localhost:3001/one",{
+        let res = await axios.post("https://blogmania-server.herokuapp.com/one",{
             name:Parms.id 
         },{
             headers:{
