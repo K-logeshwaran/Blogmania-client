@@ -28,7 +28,6 @@ function Singup(){
               let DOJ = new Date()
               let res = await axios.post("https://blogmania-server.herokuapp.com/login",{email,password,DOJ,userName},{
                 headers:{
-                  
                   "Access-Control-Allow-Origin": "*"
               }
               })
@@ -36,14 +35,22 @@ function Singup(){
               if(res.status === 200){
                  setRegistered(true)
                  setLoading(false)
-                }
+              }else if(res.status==409){
+                setError(`${email} account already exists so plz login`)
+                setLoading(false)
+                setlink(true)
+              }
+              
 
           }catch(err){
-              console.log(err);
-              if(err.response.status==409){
-                  setError(`${email} account already exists so plz login`)
-                  setlink(true)
+              let ERROR =JSON.stringify(err);
+              console.log(typeof err);
+              setLoading(false)
+              if(ERROR.includes("Request failed with status code 409")=== true){
+                setError(`${email} account already exists so plz login`)
+                setlink(true) 
               }
+              
           }
       }else{
           setError(" Re-enter password correctely ")
@@ -61,7 +68,7 @@ function Singup(){
               <h1>Logged Success </h1>
               <h1>Click Here to login!</h1>
             </NavLink>
-            : loading === true ? <StyledH1>Loading</StyledH1>:
+            : loading === true ? <StyledH1>Processing...</StyledH1>:
             <BasicDiv mgBtm='50'>
                 <StyledH1 >SignUp!</StyledH1>
                   <ErrSpan>{error}</ErrSpan>
@@ -84,14 +91,10 @@ function Singup(){
                           placeholder="Enter Your Email Id" 
                           required/>
                         <FrmBtn  className="frm-btn" typeof="submit">Submit</FrmBtn>
-                        {/* <FrmBtn typeof="button" onClick={async e=>{
-                        //let res =getPassword()
-                          // let res = generatePassword()
-                          // setPassword(res.password)
-                          // pass.current.value=res.password                    
-                        }} className="frm-btn" type="button">Generate Password</FrmBtn> */}
-                        
                   </form>  
+                  {
+                    link === true && <StyledH1><NavLink to={'/'} replace>Login Please</NavLink></StyledH1>
+                  }
             </BasicDiv>   
           }      
         </Main>

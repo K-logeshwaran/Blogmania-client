@@ -49,6 +49,7 @@ function UserPage() {
     const [upload,setUpload] =useState(false)
     const [userData,setUserData] =useState(null)
     const [isBioChanged,setIsBioChanged] =useState(false)
+    const [selectedPost,setSelectedPost] =useState(null)
     let img = useRef();
 
     const useBio = ()=>setIsBioChanged(!isBioChanged)
@@ -71,76 +72,94 @@ function UserPage() {
         setUserData(data);
     }
     
-      useEffect(()=>{
+    useEffect(()=>{
         getuser()
       },[isBioChanged])
+    
+   
     return ( 
-        <>
-            {
-                userData === null ? <h1>Loading</h1> :
-                <Main>
-            { 
-                isopen===true &&<Popup
-                handleClose={usePopup}
-                content ={<EditContent close={usePopup} bioController={useBio}/>}
-                />
-
+        
+            
                 
-            }
-            {
-                upload === true && 
-                <Popup
-                    content={<input ref={img} type="file" onInput={(e)=>{
-                        console.log(e.target.files[0])
-                        setUpload(!upload)
-                    }} placeholder="upload img"/>}
-                    handleClose={()=>setUpload(!upload)}
-                />
-            }
-            <Flex>
-                <SLeft>
-                {/* <Simg onClick={e=>{
-                    setUpload(true)
-                }} src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80"/> */}
-                    <UL>
-                       <h2>{userData.userName}
-                       <li>{userData.email}</li>
-                       </h2>
-                       <li >Number of Posts:{userData.posts.length}</li>
-                       <h2>Bio:</h2> 
-                       <p>{userData.bio}</p>
-                       <Btn onClick={()=>setOpen(true)}>Edit</Btn>
-                    </UL>
-                </SLeft>
-                
-                <Side id="side">
-                    <StyledH1>Your Posts</StyledH1>
-                    {
-                        userData.posts.length === 0 ?
-                        <StyledH1>Nothing Posted Yet</StyledH1>
-                        :userData.posts.map(e=>{
-                            return(
-                                <Uposts widht="70%" >
-                                    <TopRight
-                                        
-                                        userName={userData.userName}
-                                        created_at ={e.created_at}
-                                    />
-                                    <h3 style={{"padding":"1rem"}}>{e.title}</h3>
-                                    <p style={{"padding":"1rem"}}>{e.content}</p>
-                                    <DelBtn onClick={e=>console.log("hello")}>Delete</DelBtn>
-                                </Uposts>
-                            )
-                        })
-                    }
-                </Side>
-            </Flex>
+    <Main>
+        {userData === null ? <h1>Loading.................</h1> :
+            <>
+                { 
+                    isopen===true &&<Popup
+                    handleClose={usePopup}
+                    content ={<EditContent close={usePopup} bioController={useBio}/>}
+                    />
+    
+                    
+                }
+                {
+                    upload === true && 
+                    <Popup
+                        content={<input ref={img} type="file" onInput={(e)=>{
+                            console.log(e.target.files[0])
+                            setUpload(!upload)
+                        }} placeholder="upload img"/>}
+                        handleClose={()=>setUpload(!upload)}
+                    />
+                }
+                <Flex>
+                    <SLeft>
+                    {/* <Simg onClick={e=>{
+                        setUpload(true)
+                    }} src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80"/> */}
+                        <UL>
+                           <h2>{userData.userName}
+                           <li>{userData.email}</li>
+                           </h2>
+                           <li >Number of Posts:{userData.posts.length}</li>
+                           <h2>Bio:</h2> 
+                           <p>{userData.bio}</p>
+                           <Btn onClick={()=>setOpen(true)}>Edit</Btn>
+                        </UL>
+                    </SLeft>
+                    
+                    <Side id="side">
+                        <StyledH1>Your Posts</StyledH1>
+                        {
+                            userData.posts.length === 0 ?
+                            <StyledH1>Nothing Posted Yet</StyledH1>
+                            :userData.posts.map(e=>{
+                                return(
+                                    <Uposts widht="70%" >
+                                        <TopRight
+                                            
+                                            userName={userData.userName}
+                                            created_at ={e.created_at}
+                                        />
+                                        <h3 style={{"padding":"1rem"}}>{e.title}</h3>
+                                        <p style={{"padding":"1rem"}}>{e.content}</p>
+                                        <DelBtn onClick={async e=>{
+                                            setSelectedPost(e._id)
+                                            let res =await axios.delete('https://blogmania-server.herokuapp.com/posts/delete',{
+                                                headers:{
+                                                    "x-access-token":sessionStorage.getItem("token"),
+                                                    "postid":e._id
+                                                }
+                                            
+                                            }
+                                            )
+                                            if(res.status===200) alert("Delection Success")
+                                        }}>Delete</DelBtn>
+                                    </Uposts>
+                                )
+                            })
+                        }
+                    </Side>
+                </Flex>
+            </>
+        }
+            
         </Main>
-            }
-        </>
+            
+        
      );
 }
 
 export default UserPage;
-
+// 
 // @logeshdev.com
