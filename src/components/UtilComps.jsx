@@ -30,6 +30,16 @@ const  SmallDiv = styled.div`
     }
 `
 
+function format(date){
+  let D= new Date(date)
+  return D.getDate()+"/"+D.getMonth()+"/"+D.getFullYear() 
+}
+function formatTime(date){
+  let D= new Date(date)
+  
+  return D.toLocaleTimeString()
+}
+
 function TopRight({userName,created_at,message}) {
   const state = useContext(AuthContext);
   const [user,setUser] = useState("");
@@ -55,7 +65,8 @@ function TopRight({userName,created_at,message}) {
               {/* <img  src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80"/> */}
                 <SmallDiv>
                     <h3> {userName}</h3>
-                    <h3>Posted at : {created_at}</h3>
+                    <h3>Posted at : {format(created_at)}</h3>
+                    <h4>Time : {formatTime(created_at)}</h4>
                     <h4>{message}</h4>
                 </SmallDiv>
             </UserInfo>

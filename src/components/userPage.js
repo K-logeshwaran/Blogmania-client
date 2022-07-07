@@ -143,6 +143,8 @@ function UserPage() {
                                             
                                             }
                                             )
+                                            console.log("id....");
+                                            console.log(e._id);
                                             if(res.status===200) alert("Delection Success")
                                         }}>Delete</DelBtn>
                                     </Uposts>

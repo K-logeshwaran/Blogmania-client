@@ -134,9 +134,10 @@ export const Posts =styled.div`
         font-size: 1.3rem;
         text-align: justify;
         padding: 1rem;
+        margin-top: .5rem;
     }
     h4{
-        margin-left: ${W-20}vw;
+       margin-top: .3rem;
     }
     p{
         padding: 0 1.7rem;

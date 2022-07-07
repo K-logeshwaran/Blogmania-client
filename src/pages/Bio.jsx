@@ -44,7 +44,7 @@ function Bio() {
                          </h2>
                              <li >Number of Posts:{userData.posts.length}</li>
                          <h2>Bio:</h2> 
-                         <p>{userData.bio}</p>
+                         <p>{userData.bio === "No Updated yet" || ""  ? <p>Not Updated yet</p> : userData.bio }</p>
                      </UL>
                  </SLeft>
                 }
