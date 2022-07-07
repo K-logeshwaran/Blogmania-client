@@ -146,7 +146,10 @@ function UserPage() {
                                             console.log("id....");
                                             console.log(itm.title)
                                             console.log(itm._id);
-                                            if(res.status===200) alert("Delection Success")
+                                            if(res.status===200) {
+                                                alert("Delection Success")
+                                                useBio()
+                                            }
                                         }}>Delete</DelBtn>
                                     </Uposts>
                                 )
