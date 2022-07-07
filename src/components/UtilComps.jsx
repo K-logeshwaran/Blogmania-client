@@ -30,7 +30,7 @@ const  SmallDiv = styled.div`
     }
 `
 
-function TopRight({userName,created_at,handler}) {
+function TopRight({userName,created_at,message}) {
   const state = useContext(AuthContext);
   const [user,setUser] = useState("");
  
@@ -56,6 +56,7 @@ function TopRight({userName,created_at,handler}) {
                 <SmallDiv>
                     <h3> {userName}</h3>
                     <h3>Posted at : {created_at}</h3>
+                    <h4>{message}</h4>
                 </SmallDiv>
             </UserInfo>
         </Disp>
@@ -63,7 +64,7 @@ function TopRight({userName,created_at,handler}) {
 }
 
 TopRight.defaultProps ={
-  handler:()=>console.log("cjnjndcdd")
+  message:" "
 }
 
 export const Popup = props => {

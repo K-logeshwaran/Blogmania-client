@@ -4,6 +4,7 @@ import TopRight from './UtilComps';
 
 
 import { AuthContext } from '../context/AuthContext';
+import { NavLink } from 'react-router-dom';
 
 
 function Content() {
@@ -31,14 +32,14 @@ function Content() {
 
     return ( 
         <Main height="auto">
-            <StyledInput
+            {/* <StyledInput
             autoFocus
             autoCorrect
             onChange={e=>{
                 setSearch(e.target.value)
                 console.log(search);
             }}
-             placeholder='Search'/>
+             placeholder='Search'/> */}
             {
                 
                 posts === null ? <StyledH1>Loading</StyledH1>
@@ -47,10 +48,13 @@ function Content() {
                     let exp =itm.map(e=>{
                         return(
                             <Posts>
-                                <TopRight
-                                    userName={e.created_by}
-                                    created_at={e.created_at}
-                                    />
+                                <NavLink to={`/bio/${e.created_by}`}>
+                                    <TopRight
+                                        userName={e.created_by}
+                                        message={"( Click here to view profile )"}
+                                        created_at={e.created_at}
+                                        />
+                                </NavLink>
                                 <h1>{e.title}</h1>
                                 <p>{e.content}</p>                                      
                             </Posts>   

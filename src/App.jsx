@@ -15,6 +15,7 @@ import Loginpg from './pages/Loginpg';
 import AddBlogpg from './pages/AddBlogPg';
 import UserPg from './pages/UserPg';
 import {AuthContext} from './context/AuthContext'
+import Bio from "./pages/Bio";
 
 function App() {
   const [isLogged,setLogged] = useState(false)
@@ -30,6 +31,7 @@ function App() {
             <Route exact path='/home' element={<Home/>}/>
             <Route exact path='/upload' element={<AddBlogpg/>}/>
             <Route exact path='/myacc' element={<UserPg/>}/>
+            <Route exact path='/bio/:id' element={<Bio/>}/>
         </Routes>
       </Container>
     </AuthContext.Provider>
