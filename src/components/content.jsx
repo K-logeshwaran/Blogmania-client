@@ -32,14 +32,6 @@ function Content() {
 
     return ( 
         <Main height="auto">
-            {/* <StyledInput
-            autoFocus
-            autoCorrect
-            onChange={e=>{
-                setSearch(e.target.value)
-                console.log(search);
-            }}
-             placeholder='Search'/> */}
             {
                 
                 posts === null ? <StyledH1>Loading</StyledH1>
