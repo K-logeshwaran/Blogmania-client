@@ -24,7 +24,7 @@ export function Logincp() {
       
       async function submitHandler(e){
         e.preventDefault()
-        setLoading(false)
+        setLoading(true)
         try{
             let res = await axios.post("https://blogmania-server.herokuapp.com/login/generateToken",{email,password},{ headers:{
                 "Access-Control-Allow-Origin": "*"
@@ -34,6 +34,7 @@ export function Logincp() {
                 sessionStorage.setItem("token",res.data)
                 state.setToken(res.data)
                 state.setLogged(true)
+                setLoading(false)
                 state.setAnyChange("home")
                 navigate('/home',{ replace: true })
             }
@@ -59,7 +60,7 @@ export function Logincp() {
             <BasicDiv>
                 {
                     loading === true ? 
-                    <StyledH1>Loading</StyledH1>
+                    <StyledH1>Logging In Please wait ...........</StyledH1>
                     :
                     <>
                         <StyledH1>LogIn!</StyledH1>
